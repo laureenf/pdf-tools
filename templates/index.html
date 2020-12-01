@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='images/file.svg') }}" type="image/x-icon">
     <title>PDF Tools</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <a class="navbar-brand" href="#">PDF Tools</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
@@ -26,30 +27,67 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Dark Mode</button>
             </ul>
         </div>
     </nav>
-    <div class="container border border-dark">
-        <div class="row-content">
+    <div class="container d-sm-flex flex-wrap justify-content-between align-items-stretch">
+        
             <div class="card" >
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title">
+                        <a href="" class="card-link text-danger ">Merge PDFs</a>
+                    </h5>
+                    
+                    <p class="card-text text-light">Click to merge two or more pdf files. Can merge upto 10 pdf files.</p>
+                    
                 </div>
             </div>
             <div class="card" >
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title">
+                        <a href="" class="card-link text-danger">Split PDF</a></h5>
+                    
+                    <p class="card-text text-light">Click to split pdf file based on page number.</p>
+                    
                 </div>
             </div>
-        </div>
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="" class="card-link text-danger">Rotate PDF</a></h5>
+                    
+                    <p class="card-text text-light">Click to rotate pdf file to a desired degree.</p>
+                    
+                </div>
+            </div>
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="" class="card-link text-danger">Add Watermark</a></h5>
+                    
+                    <p class="card-text text-light">Click to add a watermark to your pdf file</p>
+                    
+                </div>
+            </div>
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="" class="card-link text-danger">Convert PDF to Word</a></h5>
+                    
+                    <p class="card-text text-light">Click to convert pdf file to a doc file.</p>
+                    
+                </div>
+            </div>
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="" class="card-link text-danger">Convert Word to PDF</a></h5>
+                    
+                    <p class="card-text text-light">Click to convert doc file to a pdf file.</p>
+                    
+                </div>
+            </div>
         
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
