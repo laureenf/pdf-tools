@@ -1,0 +1,20 @@
+html, body {
+    background-color: rgb(221, 218, 218);
+    height: 100%;
+    
+}
+
+body > .container {
+    padding: 0px;
+    display: flex;
+    margin-top: 75px;
+    flex-direction: row;
+    position: relative;
+}
+
+.card {
+    width: 30%;
+}
+
+
+
