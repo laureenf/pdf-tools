@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container d-sm-flex flex-wrap justify-content-between align-items-stretch">   
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('merge_pdf') }}" class="card-link text-danger ">Merge PDFs</a></h5>
+            <p class="card-text text-light">Click to merge two or more pdf files. Can merge upto 10 pdf files.</p>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('split_pdf') }}" class="card-link text-danger">Split PDF</a></h5>
+            <p class="card-text text-light">Click to split pdf file based on page number.</p>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('rotate_pdf') }}" class="card-link text-danger">Rotate PDF</a></h5>
+            <p class="card-text text-light">Click to rotate pdf file to a desired degree.</p>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('watermark_pdf') }}" class="card-link text-danger">Add Watermark</a></h5>
+            <p class="card-text text-light">Click to add a watermark to your pdf file</p>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('pdf_to_word') }}" class="card-link text-danger">Convert PDF to Word</a></h5>
+            <p class="card-text text-light">Click to convert pdf file to a doc file.</p>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('word_to_pdf') }}" class="card-link text-danger">Convert Word to PDF</a></h5>
+            <p class="card-text text-light">Click to convert doc file to a pdf file.</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

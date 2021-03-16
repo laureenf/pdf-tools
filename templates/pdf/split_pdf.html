@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container main-content text-light">
+    <h2 class="pb-2 text-danger border-bottom">Split PDF</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-group mt-4">
+            <input type="file" name="files" id="files" accept=".pdf" required>
+        </div>
+        
+        <button type="submit" class="btn btn-danger">Split?</button>
+        <button type="reset" class="btn btn-secondary">Cancel</button>
+    </form>
+</div>
+{% endblock %}

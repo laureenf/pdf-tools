@@ -1,5 +1,5 @@
 html, body {  
-    height: 100%;  
+    height: 100%;
 }
 
 /* navbar */
@@ -8,10 +8,11 @@ html, body {
 }
 
 
-body > .container {
+body > .d-sm-flex {
     padding: 0px;
 }
 
+/* home page */
 .card {
     margin-bottom: 15px;
     background-color: black;
@@ -23,7 +24,7 @@ body > .container {
         margin: 5px 10px;
     }
 
-    .container {
+    .d-sm-flex {
         margin-top: 75px;
     }
 }
@@ -34,7 +35,7 @@ body > .container {
         padding: 10px;
     }
 
-    .container {
+    .d-sm-flex {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -48,7 +49,7 @@ body > .container {
         padding: 10px;
     }
 
-    .container {
+    .d-sm-flex {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -69,4 +70,11 @@ body > .container {
     }
 }
 
+/* end of home page */
 
+.main-content {
+    margin-top: 200px;
+    background-color: black;
+    padding: 20px;
+    width: 40%;
+}
