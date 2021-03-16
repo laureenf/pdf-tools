@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from flask_wtf import FlaskForm
 from wtforms import MultipleFileField
-from pdf_tools import merge
+from pdf_tools import merge, rotate
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecret'
@@ -26,6 +26,11 @@ def split_pdf():
 
 @app.route('/rotate_pdf', methods=['GET', 'POST'])
 def rotate_pdf():
+    if request.method == 'POST':
+        file = request.files['file']
+        degree = int(request.form.get('degreeOfRotation'))
+        rotate(file, degree)
+        return send_file('output.pdf', as_attachment=True)
     return render_template('pdf/rotate_pdf.html')
 
 @app.route('/watermark_pdf', methods=['GET', 'POST'])
