@@ -2,21 +2,39 @@ import PyPDF2
 
 def merge(files):
     pdfWriter = PyPDF2.PdfFileWriter()
-    for file in files:
-        pdfReader = PyPDF2.PdfFileReader(file)
+    for pdf in files:
+        pdfReader = PyPDF2.PdfFileReader(pdf)
         for page in range(pdfReader.numPages):
             pdfWriter.addPage(pdfReader.getPage(page))
     pdfOutput = open('output.pdf', 'wb')
     pdfWriter.write(pdfOutput)
     pdfOutput.close()
 
-def rotate(file, degree):
-    pdfReader = PyPDF2.PdfFileReader(file)
+def rotate(pdf, degree):
+    pdfReader = PyPDF2.PdfFileReader(pdf)
     pdfWriter = PyPDF2.PdfFileWriter()
     for pageNo in range(pdfReader.numPages):
         page = pdfReader.getPage(pageNo)
         page.rotateClockwise(degree)
         pdfWriter.addPage(page)
+    pdfOutput = open('output.pdf', 'wb')
+    pdfWriter.write(pdfOutput)
+    pdfOutput.close()
+
+def watermark(pdf, watermark_file, pages):
+    pdfReader = PyPDF2.PdfFileReader(pdf)
+    watermarkReader = PyPDF2.PdfFileReader(watermark_file)
+    pdfWriter = PyPDF2.PdfFileWriter()
+    pageObj = watermarkReader.getPage(0)
+    if pages == 'first':
+        page = pdfReader.getPage(0)
+        page.mergePage(pageObj)
+        pdfWriter.addPage(page)
+    elif pages == 'all':
+        for pageNo in range(pdfReader.numPages):
+            page = pdfReader.getPage(pageNo)
+            page.mergePage(pageObj)
+            pdfWriter.addPage(page)
     pdfOutput = open('output.pdf', 'wb')
     pdfWriter.write(pdfOutput)
     pdfOutput.close()
