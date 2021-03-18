@@ -43,13 +43,14 @@ def watermark_pdf():
         return send_file('output.pdf', as_attachment=True)
     return render_template('pdf/watermark_pdf.html')
 
+@app.route('/encrypt_pdf', methods=['GET', 'POST'])
+def encrypt_pdf():
+    return render_template('pdf/encrypt_pdf.html')
+
 @app.route('/word_to_pdf', methods=['GET', 'POST'])
 def word_to_pdf():
     return render_template('pdf/word_to_pdf.html')
 
-@app.route('/pdf_to_word', methods=['GET', 'POST'])
-def pdf_to_word():
-    return render_template('pdf/pdf_to_word.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

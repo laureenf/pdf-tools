@@ -21,17 +21,19 @@ def rotate(pdf, degree):
     pdfWriter.write(pdfOutput)
     pdfOutput.close()
 
-def watermark(pdf, watermark_file, pages):
+def watermark(pdf, watermark_file, typ):
     pdfReader = PyPDF2.PdfFileReader(pdf)
     watermarkReader = PyPDF2.PdfFileReader(watermark_file)
     pdfWriter = PyPDF2.PdfFileWriter()
     pageObj = watermarkReader.getPage(0)
-    if pages == 'first':
+    if typ == 'first':
         page = pdfReader.getPage(0)
         page.mergePage(pageObj)
         pdfWriter.addPage(page)
-    elif pages == 'all':
-        for pageNo in range(pdfReader.numPages):
+        for pageNo in range(1, pdfReader.getNumPages()):
+            pdfWriter.addPage(pdfReader.getPage(pageNo))
+    elif typ == 'all':
+        for pageNo in range(pdfReader.getNumPages()):
             page = pdfReader.getPage(pageNo)
             page.mergePage(pageObj)
             pdfWriter.addPage(page)
