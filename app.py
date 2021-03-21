@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from flask_wtf import FlaskForm
 from wtforms import MultipleFileField
-from pdf_tools import merge, rotate, watermark
+from pdf_tools import merge, rotate, watermark, encrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecret'
@@ -45,6 +45,11 @@ def watermark_pdf():
 
 @app.route('/encrypt_pdf', methods=['GET', 'POST'])
 def encrypt_pdf():
+    if request.method == 'POST':
+        pdf = request.files['file']
+        password = request.form.get('password')
+        encrypt(pdf, password)
+        return send_file('output.pdf', as_attachment=True)
     return render_template('pdf/encrypt_pdf.html')
 
 @app.route('/word_to_pdf', methods=['GET', 'POST'])

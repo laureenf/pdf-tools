@@ -40,3 +40,13 @@ def watermark(pdf, watermark_file, typ):
     pdfOutput = open('output.pdf', 'wb')
     pdfWriter.write(pdfOutput)
     pdfOutput.close()
+
+def encrypt(pdf, password):
+    pdfReader = PyPDF2.PdfFileReader(pdf)
+    pdfWriter = PyPDF2.PdfFileWriter()
+    for pageNo in range(pdfReader.getNumPages()):
+        pdfWriter.addPage(pdfReader.getPage(pageNo))
+    pdfWriter.encrypt(password)
+    pdfOutput = open('output.pdf', 'wb')
+    pdfWriter.write(pdfOutput)
+    pdfOutput.close()

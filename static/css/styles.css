@@ -78,3 +78,9 @@ body > .d-sm-flex {
     padding: 20px;
     width: 40%;
 }
+
+.container i {
+    margin-left: -30px;
+    color: black;
+    cursor: pointer;
+}
