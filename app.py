@@ -1,7 +1,9 @@
+import re
+
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from flask_wtf import FlaskForm
 from wtforms import MultipleFileField
-from pdf_tools import merge, rotate, watermark, encrypt
+from pdf_tools import merge, split, rotate, watermark, encrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecret'
@@ -22,6 +24,29 @@ def merge_pdf():
 
 @app.route('/split_pdf', methods=['GET', 'POST'])
 def split_pdf():
+    if request.method == 'POST':
+        pdf = request.files['file']
+        ranges = request.form.get('range')
+
+        regexObj = re.compile(r'\d+-\d+|\d+')
+        matches = regexObj.findall(ranges)
+        range_list = []
+        page_list = []
+        for match in matches:
+            if '-' in match:
+                left, right = match.split('-')
+                if left < right and int(left) > 0 and int(right) > 0:
+                    range_list.append([int(left), int(right)])
+            else:
+                if int(match) > 0:
+                    page_list.append(int(match))
+
+        if range_list == [] and page_list == []:
+            return render_template('pdf/split_pdf.html', error = 'Invalid range specification')
+        else:
+            split(pdf, range_list, page_list)
+            return send_file('new.zip', as_attachment=True, mimetype='zip')
+    
     return render_template('pdf/split_pdf.html')
 
 @app.route('/rotate_pdf', methods=['GET', 'POST'])
@@ -55,7 +80,6 @@ def encrypt_pdf():
 @app.route('/word_to_pdf', methods=['GET', 'POST'])
 def word_to_pdf():
     return render_template('pdf/word_to_pdf.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)

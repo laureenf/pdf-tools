@@ -1,4 +1,4 @@
-import PyPDF2
+import os, zipfile, PyPDF2
 
 def merge(files):
     pdfWriter = PyPDF2.PdfFileWriter()
@@ -9,6 +9,39 @@ def merge(files):
     pdfOutput = open('output.pdf', 'wb')
     pdfWriter.write(pdfOutput)
     pdfOutput.close()
+
+def split(pdf, rangeList, pageList):
+    
+    try:
+        os.remove('new.zip')
+    except FileNotFoundError:
+        pass
+
+    pdfReader = PyPDF2.PdfFileReader(pdf)
+    downloadZip = zipfile.ZipFile('new.zip', 'a')
+
+    for lst in rangeList:
+        pdfWriter = PyPDF2.PdfFileWriter()
+        if lst[0] <= pdfReader.numPages and lst[1] <= pdfReader.numPages:
+            for pageNo in range(lst[0]-1, lst[1]):
+                pdfWriter.addPage(pdfReader.getPage(pageNo))
+            pdfOutput = open('temp/output' + str(lst[0]) + str(lst[1]) + '.pdf', 'wb')
+            pdfWriter.write(pdfOutput)
+            pdfOutput.close()
+            downloadZip.write(pdfOutput.name, compress_type=zipfile.ZIP_DEFLATED)
+    
+    for page in pageList:
+        pdfWriter = PyPDF2.PdfFileWriter()
+        if page <= pdfReader.numPages:
+            pdfWriter.addPage(pdfReader.getPage(page-1))
+        pdfOutput = open('temp/output' + str(page) + '.pdf', 'wb')
+        pdfWriter.write(pdfOutput)
+        pdfOutput.close()
+        downloadZip.write(pdfOutput.name, compress_type=zipfile.ZIP_DEFLATED)
+
+    downloadZip.close()
+    for pdf in os.listdir('temp'):
+        os.remove('temp/' + pdf)
 
 def rotate(pdf, degree):
     pdfReader = PyPDF2.PdfFileReader(pdf)
