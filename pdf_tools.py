@@ -19,10 +19,11 @@ def split(pdf, rangeList, pageList):
 
     pdfReader = PyPDF2.PdfFileReader(pdf)
     downloadZip = zipfile.ZipFile('new.zip', 'a')
-
+    added = False
     for lst in rangeList:
         pdfWriter = PyPDF2.PdfFileWriter()
         if lst[0] <= pdfReader.numPages and lst[1] <= pdfReader.numPages:
+            added = True
             for pageNo in range(lst[0]-1, lst[1]):
                 pdfWriter.addPage(pdfReader.getPage(pageNo))
             pdfOutput = open('temp/output' + str(lst[0]) + str(lst[1]) + '.pdf', 'wb')
@@ -33,6 +34,7 @@ def split(pdf, rangeList, pageList):
     for page in pageList:
         pdfWriter = PyPDF2.PdfFileWriter()
         if page <= pdfReader.numPages:
+            added = True
             pdfWriter.addPage(pdfReader.getPage(page-1))
         pdfOutput = open('temp/output' + str(page) + '.pdf', 'wb')
         pdfWriter.write(pdfOutput)
@@ -42,6 +44,24 @@ def split(pdf, rangeList, pageList):
     downloadZip.close()
     for pdf in os.listdir('temp'):
         os.remove('temp/' + pdf)
+
+    return added
+
+def remove(pdf, matches):
+    pdfReader = PyPDF2.PdfFileReader(pdf)
+    pdfWriter = PyPDF2.PdfFileWriter()
+    i=0
+    removed = False
+    for pageNo in range(pdfReader.numPages):
+        if i < len(matches) and matches[i] == pageNo + 1:
+            i += 1
+            removed = True
+            continue
+        pdfWriter.addPage(pdfReader.getPage(pageNo))
+    pdfOutput = open('output.pdf', 'wb')
+    pdfWriter.write(pdfOutput)
+    pdfOutput.close()
+    return removed
 
 def rotate(pdf, degree):
     pdfReader = PyPDF2.PdfFileReader(pdf)

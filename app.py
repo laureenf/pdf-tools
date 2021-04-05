@@ -1,9 +1,7 @@
 import re
 
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
-from flask_wtf import FlaskForm
-from wtforms import MultipleFileField
-from pdf_tools import merge, split, rotate, watermark, encrypt
+from pdf_tools import merge, split, remove, rotate, watermark, encrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecret'
@@ -44,10 +42,42 @@ def split_pdf():
         if range_list == [] and page_list == []:
             return render_template('pdf/split_pdf.html', error = 'Invalid range specification')
         else:
-            split(pdf, range_list, page_list)
-            return send_file('new.zip', as_attachment=True, mimetype='zip')
-    
+            if split(pdf, range_list, page_list):
+                return send_file('new.zip', as_attachment=True, mimetype='zip')
+            else:
+                return render_template('pdf/split_pdf.html', error = 'Invalid pages specified')
     return render_template('pdf/split_pdf.html')
+
+@app.route('/remove_pages', methods=['GET', 'POST'])
+def remove_pages():
+    if request.method == 'POST':
+        pdf = request.files['file']
+        ranges = request.form.get('range')
+
+        regexObj = re.compile(r'\d+-\d+|\d+')
+        matches = regexObj.findall(ranges)
+        
+        #expand the page ranges 
+        only_pages = []
+        for match in matches:
+            if '-' in match:
+                left, right = match.split('-')
+                if int(left) < int(right):
+                    for num in range(int(left), int(right)+1):
+                        only_pages.append(num)
+            else:
+                only_pages.append(int(match))
+
+        if only_pages == []:
+            return render_template('pdf/remove_pages.html', error = 'Invalid range specification')
+        else:
+            #sort the list
+            matches = sorted(set(only_pages))
+            if remove(pdf, matches):
+                return send_file('output.pdf', as_attachment=True)
+            else:
+                return render_template('pdf/remove_pages.html', error = 'Invalid pages specified')
+    return render_template('pdf/remove_pages.html')
 
 @app.route('/rotate_pdf', methods=['GET', 'POST'])
 def rotate_pdf():
@@ -76,10 +106,6 @@ def encrypt_pdf():
         encrypt(pdf, password)
         return send_file('output.pdf', as_attachment=True)
     return render_template('pdf/encrypt_pdf.html')
-
-@app.route('/word_to_pdf', methods=['GET', 'POST'])
-def word_to_pdf():
-    return render_template('pdf/word_to_pdf.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

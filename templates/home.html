@@ -10,7 +10,13 @@
     <div class="card" >
         <div class="card-body">
             <h5 class="card-title"><a href="{{ url_for('split_pdf') }}" class="card-link text-danger">Split PDF</a></h5>
-            <p class="card-text text-light">Click to split pdf file based on page number.</p>
+            <p class="card-text text-light">Click to extract pages (split) from a pdf file based on page number.</p>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{ url_for('remove_pages') }}" class="card-link text-danger">Remove Pages</a></h5>
+            <p class="card-text text-light">Click to remove specified pages from a pdf file.</p>
         </div>
     </div>
     <div class="card" >
@@ -31,12 +37,7 @@
             <p class="card-text text-light">Click to encrypt pdf file using a password</p>
         </div>
     </div>
-    <div class="card" >
-        <div class="card-body">
-            <h5 class="card-title"><a href="{{ url_for('word_to_pdf') }}" class="card-link text-danger">Convert Word to PDF</a></h5>
-            <p class="card-text text-light">Click to convert doc file to a pdf file.</p>
-        </div>
-    </div>
+    
 
 </div>
 {% endblock %}
