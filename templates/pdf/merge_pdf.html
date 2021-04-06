@@ -6,6 +6,15 @@
         <div class="form-group mt-4">
             <input type="file" name="files" id="files" accept=".pdf" required multiple>
         </div>
+
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
         
         <button type="submit" class="btn btn-danger">Merge?</button>
         <button type="reset" class="btn btn-secondary">Cancel</button>

@@ -13,43 +13,49 @@ def home():
 
 @app.route('/merge_pdf', methods=['GET', 'POST'])
 def merge_pdf():
+    error = None
     if request.method == 'POST':
         files = request.files.getlist("files")
         if len(files) > 1:
             merge(files)
-        return send_file('output.pdf', as_attachment=True)
-    return render_template('pdf/merge_pdf.html', error_msg=None)
+            return send_file('output.pdf', as_attachment=True)
+        else:
+            error = 'Please upload more than one file for merging'
+    return render_template('pdf/merge_pdf.html', error = error)
 
 @app.route('/split_pdf', methods=['GET', 'POST'])
 def split_pdf():
+    error = None
     if request.method == 'POST':
         pdf = request.files['file']
         ranges = request.form.get('range')
 
         regexObj = re.compile(r'\d+-\d+|\d+')
         matches = regexObj.findall(ranges)
+
         range_list = []
         page_list = []
+        
         for match in matches:
             if '-' in match:
                 left, right = match.split('-')
-                if left < right and int(left) > 0 and int(right) > 0:
+                if int(left) < int(right):
                     range_list.append([int(left), int(right)])
             else:
-                if int(match) > 0:
-                    page_list.append(int(match))
+                page_list.append(int(match))
 
         if range_list == [] and page_list == []:
-            return render_template('pdf/split_pdf.html', error = 'Invalid range specification')
+            error = 'Invalid range specification'
         else:
             if split(pdf, range_list, page_list):
                 return send_file('new.zip', as_attachment=True, mimetype='zip')
             else:
-                return render_template('pdf/split_pdf.html', error = 'Invalid pages specified')
-    return render_template('pdf/split_pdf.html')
+                error = 'Invalid pages specified'
+    return render_template('pdf/split_pdf.html', error = error)
 
 @app.route('/remove_pages', methods=['GET', 'POST'])
 def remove_pages():
+    error = None
     if request.method == 'POST':
         pdf = request.files['file']
         ranges = request.form.get('range')
@@ -69,15 +75,15 @@ def remove_pages():
                 only_pages.append(int(match))
 
         if only_pages == []:
-            return render_template('pdf/remove_pages.html', error = 'Invalid range specification')
+            error = 'Invalid range specification'
         else:
             #sort the list
             matches = sorted(set(only_pages))
             if remove(pdf, matches):
                 return send_file('output.pdf', as_attachment=True)
             else:
-                return render_template('pdf/remove_pages.html', error = 'Invalid pages specified')
-    return render_template('pdf/remove_pages.html')
+                error = 'Invalid pages specified'
+    return render_template('pdf/remove_pages.html', error = error)
 
 @app.route('/rotate_pdf', methods=['GET', 'POST'])
 def rotate_pdf():
