@@ -115,8 +115,6 @@ def encrypt_pdf():
         return send_file('output.pdf', as_attachment=True)
     return render_template('pdf/encrypt_pdf.html')
 
-
-
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     success = None

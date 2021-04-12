@@ -10,7 +10,7 @@
                 <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">About</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
@@ -19,3 +19,31 @@
         </ul>
     </div>
 </nav>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog  modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-danger">About</h4>
+          <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body  border-bottom">
+          PDF files are used almost daily by most of us. This website seeks to simplify dealing with them. It offers many of the operations performed on them such as, merging, splitting, encrypting, etc.<br>
+          Also, there is dark mode available for those who wish to not have their eyes stabbed ;)<br>
+          Any feedback, positive or negative, would be helpful!
+      
+        </div>
+        <div class="modal-body">
+          Designed by Laureen Fernandes<br>
+          <i class="fa fa-envelope" aria-hidden="true"></i> laureen@gmail.com<br>
+          <i class="fa fa-phone" aria-hidden="true"></i> 9123456789
+        </div>
+  
+      </div>
+    </div>
+  </div>
