@@ -1,4 +1,5 @@
-import re
+import re, smtplib
+from email.message import EmailMessage
 
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from pdf_tools import merge, split, remove, rotate, watermark, encrypt
@@ -106,12 +107,40 @@ def watermark_pdf():
 
 @app.route('/encrypt_pdf', methods=['GET', 'POST'])
 def encrypt_pdf():
+    flash('Hello', 'danger')
     if request.method == 'POST':
         pdf = request.files['file']
         password = request.form.get('password')
         encrypt(pdf, password)
         return send_file('output.pdf', as_attachment=True)
     return render_template('pdf/encrypt_pdf.html')
+
+
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    success = None
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        msg = request.form.get('msg')
+
+        if msg:
+            message = EmailMessage()
+            message.set_content('Name: ' + name + '\nEmail: ' + email + '\nFeedback:\n' + msg)
+            message['From'] = 'from_addr'
+            message['To'] = 'to_addr'
+            message['Subject'] = f'You have received feedback from {name} about PDF Tools!'
+
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login('username', 'password')
+            server.send_message(message)
+
+            success = 'Thank you for your feedback!'
+
+    return render_template('contact.html', success = success)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
