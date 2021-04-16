@@ -2,9 +2,18 @@ html, body {
     height: 100%;
 }
 
+body {
+    background-color: #292b2c;
+}
 /* navbar */
 .navbar {
     background-color: black;
+}
+.navbar-brand, .nav-link {
+    color: white;
+}
+.navbar-brand:hover, .nav-link:hover {
+    color: grey;
 }
 
 
@@ -12,10 +21,11 @@ body > .d-sm-flex {
     padding: 0px;
 }
 
-/* home page */
+/* home page cards */
 .card {
     margin-bottom: 15px;
     background-color: black;
+    color: white;
 }
 
 /* media queries */
@@ -72,13 +82,31 @@ body > .d-sm-flex {
 
 /* end of home page */
 
+/* styles for main content */
 .main-content {
     margin-top: 200px;
     background-color: black;
     padding: 20px;
     width: 40%;
+    color: white;
 }
 
+
+/* add bottom border to headings */
+h2 {
+    border-bottom: 1px solid white;
+}
+
+/* styles for contents of About modal */
+#modalContent {
+    background-color: #292b2c;
+    color: white;
+}
+#modalCloseBtn {
+    color: white;
+}
+
+/* styles for eye icon in the password input box */
 .container i {
     margin-left: -30px;
     color: black;

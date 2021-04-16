@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="container main-content text-light">
-    <h2 class="pb-2 text-danger border-bottom">Send your Feedback</h2>
+<div class="container main-content">
+    <h2 class="pb-2 text-danger">Send your Feedback</h2>
     {% if success %}
     <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
         {{ success }}
@@ -13,15 +13,15 @@
     <form action="" method="POST">
         <div class="form-group">
             <label for="">Name</label><br>
-            <input type="text" class="form-control" name="name" id="">
+            <input type="text"  name="name" id="">
         </div>
         <div class="form-group">
             <label for="">Email ID</label><br>
-            <input type="text" class="form-control" name="email" id="" >
+            <input type="text"  name="email" id="" >
         </div>
         <div class="form-group">
             <label for="">Your Feedback</label><br>
-            <textarea name="msg" class="form-control" id="" cols="30" rows="5"></textarea>
+            <textarea name="msg"  id="" cols="30" rows="5"></textarea>
         </div>
         <button type="submit" class="btn btn-danger">Send?</button>
         <button type="reset" class="btn btn-secondary">Cancel</button>

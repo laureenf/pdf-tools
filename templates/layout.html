@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/file.svg') }}" type="image/x-icon">
     <title>PDF Tools</title>
 </head>
-<body class="bg-dark">
+<body>
     {% include 'navigation.html' %}
     {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}

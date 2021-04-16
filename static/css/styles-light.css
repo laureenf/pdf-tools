@@ -1,0 +1,39 @@
+body {
+    background-color: #f1e8d3;
+}
+
+.navbar {
+    background-color: #d9534f;
+    color: black;
+}
+.navbar-brand, .nav-link {
+    color: black;
+}
+.navbar-brand:hover, .nav-link:hover {
+    color: #292b2c;
+}
+
+.card {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.main-content {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+h2 {
+    border-bottom: 1px solid black;
+}
+
+/* styles for contents of About modal */
+#modalContent {
+    background-color: white;
+    color: black;
+}
+#modalCloseBtn {
+    color: black;
+}
