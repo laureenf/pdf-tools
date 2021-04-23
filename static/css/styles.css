@@ -28,60 +28,6 @@ body > .d-sm-flex {
     color: white;
 }
 
-/* media queries */
-@media screen and (max-width: 575px) {
-    .card {
-        margin: 5px 10px;
-    }
-
-    .d-sm-flex {
-        margin-top: 75px;
-    }
-}
-
-@media screen and (min-width:576px) {
-    .card {
-        width: 45%;
-        padding: 10px;
-    }
-
-    .d-sm-flex {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-}
-@media screen and (min-width:768px) {
-    .card {
-        width: 31%;
-        padding: 10px;
-    }
-
-    .d-sm-flex {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-}
-
-@media screen and (min-width: 992px) {
-    .card {
-        margin: 15px;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .card {
-        margin: 15px;
-    }
-}
-
-/* end of home page */
-
 /* styles for main content */
 .main-content {
     margin-top: 200px;
@@ -90,7 +36,6 @@ body > .d-sm-flex {
     width: 40%;
     color: white;
 }
-
 
 /* add bottom border to headings */
 h2 {
@@ -111,4 +56,72 @@ h2 {
     margin-left: -30px;
     color: black;
     cursor: pointer;
+}
+
+/* media queries */
+@media screen and (max-width: 575px) {
+    .card {
+        margin: 5px 10px;
+    }
+
+    .d-sm-flex {
+        margin-top: 75px;
+    }
+
+    .main-content {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width:576px) {
+    .card {
+        width: 45%;
+        padding: 10px;
+    }
+
+    .d-sm-flex {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .main-content {
+        width: 80%;
+    }
+}
+@media screen and (min-width:768px) {
+    .card {
+        width: 31%;
+        padding: 10px;
+    }
+
+    .d-sm-flex {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .main-content {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .card {
+        margin: 15px;
+    }
+
+    .main-content {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .card {
+        margin: 15px;
+    }
 }

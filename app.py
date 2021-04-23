@@ -126,13 +126,13 @@ def contact():
         if msg:
             message = EmailMessage()
             message.set_content('Name: ' + name + '\nEmail: ' + email + '\nFeedback:\n' + msg)
-            message['From'] = 'from_addr'
-            message['To'] = 'to_addr'
+            message['From'] = 'blah@gmail.com'
+            message['To'] = 'blahblah@gmail.com'
             message['Subject'] = f'You have received feedback from {name} about PDF Tools!'
 
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.starttls()
-            server.login('username', 'password')
+            server.login('blah@gmail.com', 'blah')
             server.send_message(message)
 
             success = 'Thank you for your feedback!'
