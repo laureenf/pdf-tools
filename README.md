@@ -12,6 +12,7 @@ A Flask web app, hosted on Heroku, consisting of different PDF tools.
 	
 ## Technologies
 Project was created using: 
+* PyPDF2
 * HTML5
 * CSS3
 * Bootstrap v4.5
