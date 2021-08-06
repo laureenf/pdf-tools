@@ -1,15 +1,13 @@
 # PDF Tools
-A Flask web app built for modifying PDF files, using various tools.
+A responsive Flask web app used for modifying PDF files.
 ## Table of contents
 * [About](#about)
 * [Technologies](#technologies)
 * [Screenshots](#screenshots)
 
 ## About
-* Link: http://tools-for-pdf-files.herokuapp.com/
 * Consists of merging, splitting, encrypting, rotating, adding watermark to, and removing pages from PDF files.
-* Feedback facility also available but not currently functional on the hosted site.
-* Dark mode available (default).
+* Feedback facility and dark mode available.
 	
 ## Technologies
 Project was created using: 
